@@ -5546,7 +5546,7 @@ function ConcertList() {
                 },
                 color: "info",
                 children: "Edit"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
+              }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
                 onClick: function onClick() {
                   if (window.confirm('Delete the item?')) {
                     deleteConcert(x.id);
@@ -5681,6 +5681,7 @@ function ConcertModal() {
               if (res.status == 200) {
                 alert("Added Successfully!");
                 setShowModal(false);
+                window.location.reload();
               }
 
             case 4:

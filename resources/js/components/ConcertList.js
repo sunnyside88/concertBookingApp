@@ -59,6 +59,7 @@ export default function ConcertList() {
                                           >
                                               Edit
                                           </Button>
+                                          {"  "}
                                           <Button onClick={()=>{if(window.confirm('Delete the item?')){deleteConcert(x.id)};}} color="danger">Delete</Button>
                                       </td>
                                   </tr>

@@ -37,6 +37,7 @@ export default function ConcertModal() {
         if (res.status == 200) {
             alert("Added Successfully!");
             setShowModal(false);
+            window.location.reload();
         }
     };
     return (
@@ -126,7 +127,12 @@ export default function ConcertModal() {
                         </FormGroup>
                         <FormGroup>
                             <Label for="poster">File</Label>
-                            <Input id="poster" name="file" type="file" accept="image/png, image/jpeg" />
+                            <Input
+                                id="poster"
+                                name="file"
+                                type="file"
+                                accept="image/png, image/jpeg"
+                            />
                         </FormGroup>
                     </Form>
                 </ModalBody>
