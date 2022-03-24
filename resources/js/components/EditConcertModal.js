@@ -14,8 +14,8 @@ import {
 } from "reactstrap";
 import axios from "axios";
 
-export default function ConcertModal() {
-    const [showModal, setShowModal] = useState(false);
+export default function EditConcertModal({showModal, setShowModal}) {
+    //const [showModal, setShowModal] = useState(false);
     const [title, setTitle] = useState("");
     const [performer, setPerformer] = useState("");
     const [venue, setVenue] = useState("");
@@ -41,21 +41,13 @@ export default function ConcertModal() {
     };
     return (
         <div>
-            <Button
-                outline
-                onClick={() => {
-                    setShowModal(true);
-                }}
-            >
-                New Concert
-            </Button>
             <Modal isOpen={showModal}>
                 <ModalHeader
                     toggle={() => {
                         setShowModal(false);
                     }}
                 >
-                    New Concert
+                    Edit Concert
                 </ModalHeader>
                 <ModalBody>
                     <Form>
@@ -147,6 +139,6 @@ export default function ConcertModal() {
     );
 }
 
-if (document.getElementById("concert-modal")) {
-    ReactDOM.render(<ConcertModal />, document.getElementById("concert-modal"));
+if (document.getElementById("edit-concert-modal")) {
+    ReactDOM.render(<EditConcertModal />, document.getElementById("edit-concert-modal"));
 }

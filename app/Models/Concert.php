@@ -12,13 +12,17 @@ class Concert extends Model
 
     protected $table = 'concert';
 
-    protected $primaryKey = 'concert_id';
     public $incrementing = true;
     protected $keyType = 'string';
 
     protected $fillable = [
-        'title', 'dateTime', 'performer', 'venue',
+        'title', 'date', 'performer', 'venue', 'time', 'totalSeats', 'price'
     ];
 
     public $timestamps = true;
+
+    public function seats()
+    {
+        return $this->hasMany(Seat::class, 'concert_id');
+    }
 }

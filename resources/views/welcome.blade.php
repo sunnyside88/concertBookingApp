@@ -18,9 +18,11 @@
         @if (Route::has('login'))
         <div class="card-header d-flex">
             <div class="me-auto p-2">
-                <h2 style="padding-left:10px">GoLive <img src="https://img.icons8.com/external-royyan-wijaya-detailed-outline-royyan-wijaya/24/000000/external-disc-music-royyan-wijaya-detailed-outline-royyan-wijaya.png"/></h2>
+                <h2 style="padding-left:10px">GoLive <img
+                        src="https://img.icons8.com/external-royyan-wijaya-detailed-outline-royyan-wijaya/24/000000/external-disc-music-royyan-wijaya-detailed-outline-royyan-wijaya.png" />
+                </h2>
             </div>
-            <div class="p-2">   
+            <div class="p-2">
                 @auth
                 <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500">Home</a>
                 @else
@@ -36,7 +38,10 @@
         </div>
 
         @endif
-        <div id="carousel"></div>
+        <div style=" padding:10px; max-width:600px; max-height:300px !important;">
+            <div id="carousel"></div>
+
+        </div>
 
     </div>
 
