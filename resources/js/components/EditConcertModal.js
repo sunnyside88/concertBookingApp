@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import {
@@ -14,8 +14,11 @@ import {
 } from "reactstrap";
 import axios from "axios";
 
-export default function EditConcertModal({showModal, setShowModal}) {
-    //const [showModal, setShowModal] = useState(false);
+export default function EditConcertModal({
+    showModal,
+    setShowModal,
+    editConcertId,
+}) {
     const [title, setTitle] = useState("");
     const [performer, setPerformer] = useState("");
     const [venue, setVenue] = useState("");
@@ -24,8 +27,8 @@ export default function EditConcertModal({showModal, setShowModal}) {
     const [price, setPrice] = useState("");
     const [totalSeats, setTotalSeats] = useState("");
 
-    const addConcert = async () => {
-        let res = await axios.post("http://127.0.0.1:3000/api/concert", {
+    const updateConcert = async (id) => {
+        let res = await axios.put(`http://127.0.0.1:3000/api/concert/${editConcertId}`, {
             title: title,
             performer: performer,
             venue: venue,
@@ -35,10 +38,31 @@ export default function EditConcertModal({showModal, setShowModal}) {
             totalSeats: totalSeats,
         });
         if (res.status == 200) {
-            alert("Added Successfully!");
+            alert("Update Successfully!");
             setShowModal(false);
+            window.location.reload();
         }
     };
+
+    const getCurrentConcert = async () => {
+        let res = await axios.get(
+            `http://127.0.0.1:3000/api/concert/${editConcertId}`
+        );
+        setTitle(res.data.title);
+        setDate(res.data.date);
+        setPerformer(res.data.performer);
+        setPrice(res.data.price);
+        setTime(res.data.time);
+        setVenue(res.data.venue);
+        setTotalSeats(res.data.totalSeats);
+    };
+
+    useEffect(() => {
+        if (editConcertId) {
+            getCurrentConcert();
+        }
+    }, [editConcertId]);
+
     return (
         <div>
             <Modal isOpen={showModal}>
@@ -57,6 +81,7 @@ export default function EditConcertModal({showModal, setShowModal}) {
                                 id="title"
                                 name="title"
                                 placeholder="Enter title"
+                                value={title}
                                 onChange={(e) => setTitle(e.target.value)}
                             />
                         </FormGroup>
@@ -66,6 +91,7 @@ export default function EditConcertModal({showModal, setShowModal}) {
                                 id="performer"
                                 name="performer"
                                 placeholder="Enter Performer"
+                                value={performer}
                                 onChange={(e) => setPerformer(e.target.value)}
                             />
                         </FormGroup>
@@ -75,6 +101,7 @@ export default function EditConcertModal({showModal, setShowModal}) {
                                 id="venue"
                                 name="venue"
                                 placeholder="Enter Venue"
+                                value={venue}
                                 onChange={(e) => setVenue(e.target.value)}
                             />
                         </FormGroup>
@@ -84,6 +111,7 @@ export default function EditConcertModal({showModal, setShowModal}) {
                                 id="date"
                                 name="date"
                                 type="date"
+                                value={date}
                                 onChange={(e) => setDate(e.target.value)}
                             />
                         </FormGroup>
@@ -93,6 +121,7 @@ export default function EditConcertModal({showModal, setShowModal}) {
                                 id="time"
                                 name="time"
                                 type="time"
+                                value={time}
                                 onChange={(e) => setTime(e.target.value)}
                             />
                         </FormGroup>
@@ -103,6 +132,7 @@ export default function EditConcertModal({showModal, setShowModal}) {
                                 name="price"
                                 placeholder="Enter Price"
                                 type="number"
+                                value={price}
                                 onChange={(e) => setPrice(e.target.value)}
                             />
                         </FormGroup>
@@ -113,19 +143,23 @@ export default function EditConcertModal({showModal, setShowModal}) {
                                 name="totalSeats"
                                 placeholder="Enter total seats"
                                 type="number"
+                                value={totalSeats}
                                 onChange={(e) => setTotalSeats(e.target.value)}
                             />
                         </FormGroup>
                         <FormGroup>
                             <Label for="poster">File</Label>
-                            <Input id="poster" name="file" type="file" accept="image/png, image/jpeg" />
+                            <Input
+                                id="poster"
+                                name="file"
+                                type="file"
+                                accept="image/png, image/jpeg"
+                            />
                         </FormGroup>
                     </Form>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="primary" onClick={addConcert}>
-                        Save
-                    </Button>{" "}
+                    <Button onClick={()=>updateConcert()} color="primary">Save</Button>{" "}
                     <Button
                         onClick={() => {
                             setShowModal(false);
@@ -140,5 +174,8 @@ export default function EditConcertModal({showModal, setShowModal}) {
 }
 
 if (document.getElementById("edit-concert-modal")) {
-    ReactDOM.render(<EditConcertModal />, document.getElementById("edit-concert-modal"));
+    ReactDOM.render(
+        <EditConcertModal />,
+        document.getElementById("edit-concert-modal")
+    );
 }

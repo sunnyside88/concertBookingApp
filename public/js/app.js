@@ -5293,6 +5293,8 @@ __webpack_require__(/*! ./components/ConcertList */ "./resources/js/components/C
 
 __webpack_require__(/*! ./components/EditConcertModal */ "./resources/js/components/EditConcertModal.js");
 
+__webpack_require__(/*! ./components/PosterCard */ "./resources/js/components/PosterCard.js");
+
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
@@ -5441,6 +5443,11 @@ function ConcertList() {
       showEditModal = _useState4[0],
       setShowEditModal = _useState4[1];
 
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState6 = _slicedToArray(_useState5, 2),
+      concertEditId = _useState6[0],
+      setConcertEditId = _useState6[1];
+
   var getConcertListing = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
       var res;
@@ -5453,10 +5460,9 @@ function ConcertList() {
 
             case 2:
               res = _context.sent;
-              console.log(res);
               setData(res.data);
 
-            case 5:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -5502,7 +5508,8 @@ function ConcertList() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_EditConcertModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
       showModal: showEditModal,
-      setShowModal: setShowEditModal
+      setShowModal: setShowEditModal,
+      editConcertId: concertEditId
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Table, {
       striped: true,
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("thead", {
@@ -5519,6 +5526,8 @@ function ConcertList() {
             children: "Date"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
             children: "Time"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
+            children: "Total Seats"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
             children: "Action"
           })]
@@ -5539,20 +5548,21 @@ function ConcertList() {
               children: x.date
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
               children: x.time
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
+              children: x.totalSeats
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("td", {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
                 onClick: function onClick() {
-                  return setShowEditModal(true);
+                  setConcertEditId(x.id);
+                  setShowEditModal(true);
                 },
                 color: "info",
                 children: "Edit"
-              }), "  ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
+              }), "   ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
                 onClick: function onClick() {
-                  if (window.confirm('Delete the item?')) {
+                  if (window.confirm("Delete the item?")) {
                     deleteConcert(x.id);
                   }
-
-                  ;
                 },
                 color: "danger",
                 children: "Delete"
@@ -5880,9 +5890,9 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function EditConcertModal(_ref) {
   var showModal = _ref.showModal,
-      setShowModal = _ref.setShowModal;
+      setShowModal = _ref.setShowModal,
+      editConcertId = _ref.editConcertId;
 
-  //const [showModal, setShowModal] = useState(false);
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState2 = _slicedToArray(_useState, 2),
       title = _useState2[0],
@@ -5918,15 +5928,15 @@ function EditConcertModal(_ref) {
       totalSeats = _useState14[0],
       setTotalSeats = _useState14[1];
 
-  var addConcert = /*#__PURE__*/function () {
-    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+  var updateConcert = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(id) {
       var res;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_4___default().post("http://127.0.0.1:3000/api/concert", {
+              return axios__WEBPACK_IMPORTED_MODULE_4___default().put("http://127.0.0.1:3000/api/concert/".concat(editConcertId), {
                 title: title,
                 performer: performer,
                 venue: venue,
@@ -5940,8 +5950,9 @@ function EditConcertModal(_ref) {
               res = _context.sent;
 
               if (res.status == 200) {
-                alert("Added Successfully!");
+                alert("Update Successfully!");
                 setShowModal(false);
+                window.location.reload();
               }
 
             case 4:
@@ -5952,11 +5963,49 @@ function EditConcertModal(_ref) {
       }, _callee);
     }));
 
-    return function addConcert() {
+    return function updateConcert(_x) {
       return _ref2.apply(this, arguments);
     };
   }();
 
+  var getCurrentConcert = /*#__PURE__*/function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var res;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return axios__WEBPACK_IMPORTED_MODULE_4___default().get("http://127.0.0.1:3000/api/concert/".concat(editConcertId));
+
+            case 2:
+              res = _context2.sent;
+              setTitle(res.data.title);
+              setDate(res.data.date);
+              setPerformer(res.data.performer);
+              setPrice(res.data.price);
+              setTime(res.data.time);
+              setVenue(res.data.venue);
+              setTotalSeats(res.data.totalSeats);
+
+            case 10:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function getCurrentConcert() {
+      return _ref3.apply(this, arguments);
+    };
+  }();
+
+  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    if (editConcertId) {
+      getCurrentConcert();
+    }
+  }, [editConcertId]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Modal, {
       isOpen: showModal,
@@ -5975,6 +6024,7 @@ function EditConcertModal(_ref) {
               id: "title",
               name: "title",
               placeholder: "Enter title",
+              value: title,
               onChange: function onChange(e) {
                 return setTitle(e.target.value);
               }
@@ -5987,6 +6037,7 @@ function EditConcertModal(_ref) {
               id: "performer",
               name: "performer",
               placeholder: "Enter Performer",
+              value: performer,
               onChange: function onChange(e) {
                 return setPerformer(e.target.value);
               }
@@ -5999,6 +6050,7 @@ function EditConcertModal(_ref) {
               id: "venue",
               name: "venue",
               placeholder: "Enter Venue",
+              value: venue,
               onChange: function onChange(e) {
                 return setVenue(e.target.value);
               }
@@ -6011,6 +6063,7 @@ function EditConcertModal(_ref) {
               id: "date",
               name: "date",
               type: "date",
+              value: date,
               onChange: function onChange(e) {
                 return setDate(e.target.value);
               }
@@ -6023,6 +6076,7 @@ function EditConcertModal(_ref) {
               id: "time",
               name: "time",
               type: "time",
+              value: time,
               onChange: function onChange(e) {
                 return setTime(e.target.value);
               }
@@ -6036,6 +6090,7 @@ function EditConcertModal(_ref) {
               name: "price",
               placeholder: "Enter Price",
               type: "number",
+              value: price,
               onChange: function onChange(e) {
                 return setPrice(e.target.value);
               }
@@ -6049,6 +6104,7 @@ function EditConcertModal(_ref) {
               name: "totalSeats",
               placeholder: "Enter total seats",
               type: "number",
+              value: totalSeats,
               onChange: function onChange(e) {
                 return setTotalSeats(e.target.value);
               }
@@ -6067,8 +6123,10 @@ function EditConcertModal(_ref) {
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.ModalFooter, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Button, {
+          onClick: function onClick() {
+            return updateConcert();
+          },
           color: "primary",
-          onClick: addConcert,
           children: "Save"
         }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Button, {
           onClick: function onClick() {
@@ -6083,6 +6141,60 @@ function EditConcertModal(_ref) {
 
 if (document.getElementById("edit-concert-modal")) {
   react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(EditConcertModal, {}), document.getElementById("edit-concert-modal"));
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/PosterCard.js":
+/*!***********************************************!*\
+  !*** ./resources/js/components/PosterCard.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ PosterCard)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.min.css */ "./node_modules/bootstrap/dist/css/bootstrap.min.css");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.modern.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+
+function PosterCard() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.CardGroup, {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.Card, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.CardImg, {
+        alt: "Card image cap",
+        src: "https://picsum.photos/318/180",
+        top: true,
+        width: "100%"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.CardBody, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.CardTitle, {
+          tag: "h5",
+          children: "Card title"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.CardSubtitle, {
+          className: "mb-2 text-muted",
+          tag: "h6",
+          children: "Card subtitle"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.CardText, {
+          children: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.Button, {
+          children: "Button"
+        })]
+      })]
+    })
+  });
+}
+
+if (document.getElementById("poster-card")) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(PosterCard, {}), document.getElementById("poster-card"));
 }
 
 /***/ }),

@@ -8,17 +8,17 @@ import EditConcertModal from "./EditConcertModal";
 export default function ConcertList() {
     const [data, setData] = useState([]);
     const [showEditModal, setShowEditModal] = useState(false);
+    const [concertEditId, setConcertEditId] = useState("");
 
     const getConcertListing = async () => {
         let res = await axios.get("http://127.0.0.1:3000/api/concertListing");
-        console.log(res);
         setData(res.data);
     };
 
-    const deleteConcert = async (id) =>{
+    const deleteConcert = async (id) => {
         let res = await axios.delete(`http://127.0.0.1:3000/api/concert/${id}`);
-        window.location.reload()
-    }
+        window.location.reload();
+    };
 
     useEffect(() => {
         getConcertListing();
@@ -26,7 +26,11 @@ export default function ConcertList() {
 
     return (
         <div>
-            <EditConcertModal showModal={showEditModal} setShowModal={setShowEditModal}></EditConcertModal>
+            <EditConcertModal
+                showModal={showEditModal}
+                setShowModal={setShowEditModal}
+                editConcertId={concertEditId}
+            ></EditConcertModal>
             <Table striped>
                 <thead>
                     <tr>
@@ -36,6 +40,7 @@ export default function ConcertList() {
                         <th>Venue</th>
                         <th>Date</th>
                         <th>Time</th>
+                        <th>Total Seats</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -50,17 +55,32 @@ export default function ConcertList() {
                                       <td>{x.venue}</td>
                                       <td>{x.date}</td>
                                       <td>{x.time}</td>
+                                      <td>{x.totalSeats}</td>
                                       <td>
                                           <Button
-                                              onClick={() =>
-                                                  setShowEditModal(true)
-                                              }
+                                              onClick={() => {
+                                                  setConcertEditId(x.id);
+                                                  setShowEditModal(true);
+                                              }}
                                               color="info"
                                           >
                                               Edit
                                           </Button>
-                                          {"  "}
-                                          <Button onClick={()=>{if(window.confirm('Delete the item?')){deleteConcert(x.id)};}} color="danger">Delete</Button>
+                                          {"   "}
+                                          <Button
+                                              onClick={() => {
+                                                  if (
+                                                      window.confirm(
+                                                          "Delete the item?"
+                                                      )
+                                                  ) {
+                                                      deleteConcert(x.id);
+                                                  }
+                                              }}
+                                              color="danger"
+                                          >
+                                              Delete
+                                          </Button>
                                       </td>
                                   </tr>
                               );

@@ -16,4 +16,6 @@ require('./components/Carousel');
 require('./components/ConcertModal');
 require('./components/ConcertList');
 require('./components/EditConcertModal');
+require('./components/PosterCard');
+
 

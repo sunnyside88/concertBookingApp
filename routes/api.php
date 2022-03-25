@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ConcertController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('concert', [AdminController::class, 'addConcert']);
-Route::get('concertListing', [AdminController::class, 'getConcertListing']);
-Route::put('concert/{id}', [AdminController::class, 'updateConcert']);
-Route::delete('concert/{id}', [AdminController::class, 'deleteConcert']);
+Route::post('concert', [ConcertController::class, 'addConcert']);
+Route::get('concertListing', [ConcertController::class, 'getConcertListing']);
+Route::get('concert/{id}', [ConcertController::class, 'readConcert']);
+Route::put('concert/{id}', [ConcertController::class, 'updateConcert']);
+Route::delete('concert/{id}', [ConcertController::class, 'deleteConcert']);
