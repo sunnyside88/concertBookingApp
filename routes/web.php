@@ -29,6 +29,7 @@ Route::group(['middleware' => 'auth:user'], function () {
     Route::view('/home', 'home');
     Route::view('/admin', 'admin');
     Route::view('/admin/concerts', 'adminConcerts');
+    Route::view('/admin/users', 'adminUsers');
 
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });

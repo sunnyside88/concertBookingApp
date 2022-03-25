@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ConcertController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,6 @@ Route::get('concertListing', [ConcertController::class, 'getConcertListing']);
 Route::get('concert/{id}', [ConcertController::class, 'readConcert']);
 Route::put('concert/{id}', [ConcertController::class, 'updateConcert']);
 Route::delete('concert/{id}', [ConcertController::class, 'deleteConcert']);
+
+Route::get('userListing', [UserController::class, 'getUserListing']);
+Route::delete('user/{id}', [UserController::class, 'deleteUser']);
