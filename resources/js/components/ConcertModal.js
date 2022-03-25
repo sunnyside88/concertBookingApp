@@ -23,6 +23,7 @@ export default function ConcertModal() {
     const [time, setTime] = useState("");
     const [price, setPrice] = useState("");
     const [totalSeats, setTotalSeats] = useState("");
+    const [posterUrl, setPosterUrl] = useState("")
 
     const addConcert = async () => {
         let res = await axios.post("http://127.0.0.1:3000/api/concert", {
@@ -33,6 +34,7 @@ export default function ConcertModal() {
             time: time,
             price: price,
             totalSeats: totalSeats,
+            posterUrl:posterUrl,
         });
         if (res.status == 200) {
             alert("Added Successfully!");
@@ -40,6 +42,7 @@ export default function ConcertModal() {
             window.location.reload();
         }
     };
+
     return (
         <div>
             <Button
@@ -126,12 +129,12 @@ export default function ConcertModal() {
                             />
                         </FormGroup>
                         <FormGroup>
-                            <Label for="poster">File</Label>
+                        <Label for="posterUrl">Poster Image Url</Label>
                             <Input
-                                id="poster"
-                                name="file"
-                                type="file"
-                                accept="image/png, image/jpeg"
+                                id="posterUrl"
+                                name="posterUrl"
+                                placeholder="Enter Poster Url"
+                                onChange={(e) => setPosterUrl(e.target.value)}
                             />
                         </FormGroup>
                     </Form>

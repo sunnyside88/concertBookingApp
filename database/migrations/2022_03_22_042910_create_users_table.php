@@ -32,7 +32,8 @@ class CreateUsersTable extends Migration
             $table->string('performer');
             $table->string('venue');
             $table->string('time');
-            $table->integer('totalSeats');
+            $table->string('totalSeats');
+            $table->string('posterUrl');
             $table->decimal('price');
             $table->timestamps();
         });

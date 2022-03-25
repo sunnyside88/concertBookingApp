@@ -16,7 +16,7 @@ class Concert extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
-        'title', 'date', 'performer', 'venue', 'time', 'totalSeats', 'price'
+        'title', 'date', 'performer', 'venue', 'time', 'totalSeats', 'price', 'posterUrl'
     ];
 
     public $timestamps = true;

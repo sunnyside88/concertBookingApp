@@ -39,6 +39,7 @@ class ConcertController extends Controller
             'totalSeats' =>  $request->totalSeats,
             'price' =>  $request->price,
             'time' => $request->time,
+            "posterUrl" => $request->posterUrl,
         ]);
 
         for ($x = 0; $x < $totalSeats; $x++) {
