@@ -13,6 +13,7 @@ import {
     Label,
 } from "reactstrap";
 import axios from "axios";
+import Breadcrumbs from "./Breadcrumbs";
 
 export default function ConcertModal() {
     const [showModal, setShowModal] = useState(false);
@@ -45,6 +46,7 @@ export default function ConcertModal() {
 
     return (
         <div>
+            <Breadcrumbs activeLocation="Manage Concerts"></Breadcrumbs>
             <Button
                 outline
                 onClick={() => {

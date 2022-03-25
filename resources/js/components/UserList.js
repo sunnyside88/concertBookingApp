@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Table } from "reactstrap";
 import axios from "axios";
+import Breadcrumbs from "./Breadcrumbs";
 
 export default function UserList() {
     const [data, setData] = useState([]);
@@ -23,6 +24,7 @@ export default function UserList() {
 
     return (
         <div>
+            <Breadcrumbs activeLocation="Manage Users"></Breadcrumbs>
             <Table striped>
                 <thead>
                     <tr>
