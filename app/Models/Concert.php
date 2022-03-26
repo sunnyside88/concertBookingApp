@@ -10,7 +10,7 @@ class Concert extends Model
     use HasFactory;
 
 
-    protected $table = 'concert';
+    protected $table = 'concerts';
 
     public $incrementing = true;
     protected $keyType = 'string';

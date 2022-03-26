@@ -13,7 +13,7 @@ require('./bootstrap');
  */
 
 require('./components/Carousel');
-require('./components/ConcertModal');
+require('./components/AddConcertModal');
 require('./components/ConcertList');
 require('./components/EditConcertModal');
 require('./components/PosterCard');

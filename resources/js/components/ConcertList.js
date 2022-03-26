@@ -10,13 +10,14 @@ export default function ConcertList() {
     const [showEditModal, setShowEditModal] = useState(false);
     const [concertEditId, setConcertEditId] = useState("");
 
+
     const getConcertListing = async () => {
-        let res = await axios.get("http://127.0.0.1:3000/api/concertListing");
+        let res = await axios.get("http://127.0.0.1:8000/api/concertListing");
         setData(res.data);
     };
 
     const deleteConcert = async (id) => {
-        let res = await axios.delete(`http://127.0.0.1:3000/api/concert/${id}`);
+        let res = await axios.delete(`http://127.0.0.1:8000/api/concert/${id}`);
         window.location.reload();
     };
 

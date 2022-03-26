@@ -54,7 +54,7 @@ class ConcertController extends Controller
 
     public function getConcertListing()
     {
-        $concerts = DB::select('select * from concert');
+        $concerts = DB::select('select * from concerts');
         return response()->json($concerts);
     }
 
@@ -75,7 +75,7 @@ class ConcertController extends Controller
                 }
             } else {
                 $seatToDelete = $concertOriTotalSeat - $concertNewTotalSeat;
-                DB::table("seat")
+                DB::table("seats")
                     ->where("concert_id", "=", $id)
                     ->orderBy("id", "DESC")
                     ->take($seatToDelete)

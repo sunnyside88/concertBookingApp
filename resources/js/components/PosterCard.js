@@ -17,7 +17,7 @@ export default function PosterCard() {
     const [data, setData] = useState([]);
 
     const getConcertListing = async () => {
-        let res = await axios.get("http://127.0.0.1:3000/api/concertListing");
+        let res = await axios.get("http://127.0.0.1:8000/api/concertListing");
         setData(res.data);
     };
 

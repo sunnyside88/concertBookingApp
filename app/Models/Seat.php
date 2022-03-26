@@ -9,9 +9,11 @@ class Seat extends Model
 {
     use HasFactory;
 
-    protected $table = 'seat';
-    protected $primaryKey = 'seat_id';
+    public $timestamps = false;
     public $incrementing = true;
+
+    protected $table = 'seats';
+    protected $primaryKey = 'seat_id';
     protected $keyType = 'string';
 
     protected $attributes = [
@@ -22,5 +24,11 @@ class Seat extends Model
         'concert_id',
     ];
 
-    public $timestamps = false;
+    public function concert(){
+        return $this->belongsTo(concert::class);
+    }
+
+    public function bookings(){
+        return $this->hasOne(booking::class);
+    }
 }
