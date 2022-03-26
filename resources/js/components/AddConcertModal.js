@@ -34,8 +34,7 @@ export default function AddConcertModal() {
     const [totalSeatsError, setTotalSeatsError] = useState(false);
     const [posterUrlError, setPosterUrlError] = useState(false);
 
-    const addConcert = async () => {
-
+    const formChecker = async ()=>{
         if (title) {
             setTitleError(false);
         } else {
@@ -76,6 +75,9 @@ export default function AddConcertModal() {
         } else {
             setPosterUrlError(true);
         }
+    }
+
+    const addConcert = async () => {
 
         if (!timeError && !performerError && !venueError && !dateError && !timeError && !priceError
             && !totalSeatsError && !posterUrlError) {
@@ -238,7 +240,10 @@ export default function AddConcertModal() {
                     </Form>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="primary" onClick={addConcert}>
+                    <Button color="primary" onClick={()=>{
+                        formChecker();
+                        addConcert();
+                    }}>
                         Save
                     </Button>{" "}
                     <Button

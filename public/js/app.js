@@ -5471,9 +5471,8 @@ function AddConcertModal() {
       posterUrlError = _useState34[0],
       setPosterUrlError = _useState34[1];
 
-  var addConcert = /*#__PURE__*/function () {
+  var formChecker = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var res;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -5526,12 +5525,32 @@ function AddConcertModal() {
                 setPosterUrlError(true);
               }
 
+            case 8:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function formChecker() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  var addConcert = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var res;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
               if (!(!timeError && !performerError && !venueError && !dateError && !timeError && !priceError && !totalSeatsError && !posterUrlError)) {
-                _context.next = 13;
+                _context2.next = 5;
                 break;
               }
 
-              _context.next = 11;
+              _context2.next = 3;
               return axios__WEBPACK_IMPORTED_MODULE_4___default().post("http://127.0.0.1:8000/api/concert", {
                 title: title,
                 performer: performer,
@@ -5543,8 +5562,8 @@ function AddConcertModal() {
                 posterUrl: posterUrl
               });
 
-            case 11:
-              res = _context.sent;
+            case 3:
+              res = _context2.sent;
 
               if (res.status == 200) {
                 alert("Added Successfully!");
@@ -5552,16 +5571,16 @@ function AddConcertModal() {
                 window.location.reload();
               }
 
-            case 13:
+            case 5:
             case "end":
-              return _context.stop();
+              return _context2.stop();
           }
         }
-      }, _callee);
+      }, _callee2);
     }));
 
     return function addConcert() {
-      return _ref.apply(this, arguments);
+      return _ref2.apply(this, arguments);
     };
   }();
 
@@ -5721,7 +5740,10 @@ function AddConcertModal() {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.ModalFooter, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Button, {
           color: "primary",
-          onClick: addConcert,
+          onClick: function onClick() {
+            formChecker();
+            addConcert();
+          },
           children: "Save"
         }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Button, {
           onClick: function onClick() {
@@ -6111,6 +6133,56 @@ function EditConcertModal(_ref) {
       posterUrlError = _useState32[0],
       setPosterUrlError = _useState32[1];
 
+  var formChecker = function formChecker(async) {
+    if (title) {
+      setTitleError(false);
+    } else {
+      setTitleError(true);
+    }
+
+    if (performer) {
+      setPerformerError(false);
+    } else {
+      setPerformerError(true);
+    }
+
+    if (venue) {
+      setVenueError(false);
+    } else {
+      setVenueError(true);
+    }
+
+    if (date) {
+      setDateError(false);
+    } else {
+      setDateError(true);
+    }
+
+    if (time) {
+      setTimeError(false);
+    } else {
+      setTimeError(true);
+    }
+
+    if (/(^$|^\d+(\.\d{1,2})?$)/.test(price) && price > 0) {
+      setPriceError(false);
+    } else {
+      setPriceError(true);
+    }
+
+    if (/(^$|^\d+$)/.test(totalSeats) && totalSeats > 0) {
+      setTotalSeatsError(false);
+    } else {
+      setTotalSeatsError(true);
+    }
+
+    if (posterUrl) {
+      setPosterUrlError(false);
+    } else {
+      setPosterUrlError(true);
+    }
+  };
+
   var updateConcert = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(id) {
       var res;
@@ -6118,60 +6190,12 @@ function EditConcertModal(_ref) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              if (title) {
-                setTitleError(false);
-              } else {
-                setTitleError(true);
-              }
-
-              if (performer) {
-                setPerformerError(false);
-              } else {
-                setPerformerError(true);
-              }
-
-              if (venue) {
-                setVenueError(false);
-              } else {
-                setVenueError(true);
-              }
-
-              if (date) {
-                setDateError(false);
-              } else {
-                setDateError(true);
-              }
-
-              if (time) {
-                setTimeError(false);
-              } else {
-                setTimeError(true);
-              }
-
-              if (/(^$|^\d+(\.\d{1,2})?$)/.test(price) && price > 0) {
-                setPriceError(false);
-              } else {
-                setPriceError(true);
-              }
-
-              if (/(^$|^\d+$)/.test(totalSeats) && totalSeats > 0) {
-                setTotalSeatsError(false);
-              } else {
-                setTotalSeatsError(true);
-              }
-
-              if (posterUrl) {
-                setPosterUrlError(false);
-              } else {
-                setPosterUrlError(true);
-              }
-
               if (!(!timeError && !performerError && !venueError && !dateError && !timeError && !priceError && !totalSeatsError && !posterUrlError)) {
-                _context.next = 13;
+                _context.next = 5;
                 break;
               }
 
-              _context.next = 11;
+              _context.next = 3;
               return axios__WEBPACK_IMPORTED_MODULE_4___default().put("http://127.0.0.1:8000/api/concert/".concat(editConcertId), {
                 title: title,
                 performer: performer,
@@ -6183,7 +6207,7 @@ function EditConcertModal(_ref) {
                 posterUrl: posterUrl
               });
 
-            case 11:
+            case 3:
               res = _context.sent;
 
               if (res.status == 200) {
@@ -6192,7 +6216,7 @@ function EditConcertModal(_ref) {
                 window.location.reload();
               }
 
-            case 13:
+            case 5:
             case "end":
               return _context.stop();
           }
@@ -6402,7 +6426,8 @@ function EditConcertModal(_ref) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.ModalFooter, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Button, {
           onClick: function onClick() {
-            return updateConcert();
+            formChecker();
+            updateConcert();
           },
           color: "primary",
           children: "Save"

@@ -21,7 +21,7 @@ class CreateConcertsTable extends Migration
             $table->string('venue');
             $table->string('time');
             $table->string('totalSeats');
-            $table->string('posterUrl');
+            $table->string('posterUrl',8000);
             $table->decimal('price');
             $table->timestamps();
         });

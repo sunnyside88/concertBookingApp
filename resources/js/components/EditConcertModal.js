@@ -37,8 +37,7 @@ export default function EditConcertModal({
     const [totalSeatsError, setTotalSeatsError] = useState(false);
     const [posterUrlError, setPosterUrlError] = useState(false);
 
-    const updateConcert = async (id) => {
-
+    const formChecker = async =>{
         if (title) {
             setTitleError(false);
         } else {
@@ -79,6 +78,9 @@ export default function EditConcertModal({
         } else {
             setPosterUrlError(true);
         }
+    }
+
+    const updateConcert = async (id) => {
 
         if (!timeError && !performerError && !venueError && !dateError && !timeError && !priceError
             && !totalSeatsError && !posterUrlError) {
@@ -262,7 +264,7 @@ export default function EditConcertModal({
                     </Form>
                 </ModalBody>
                 <ModalFooter>
-                    <Button onClick={() => updateConcert()} color="primary">Save</Button>{" "}
+                    <Button onClick={() =>{formChecker(); updateConcert();}} color="primary">Save</Button>{" "}
                     <Button
                         onClick={() => {
                             setShowModal(false);

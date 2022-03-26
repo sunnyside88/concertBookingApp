@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ConcertController;
 use App\Http\Controllers\LogoutController;
 
 use Illuminate\Support\Facades\Auth;
@@ -30,5 +32,12 @@ Route::group(['middleware' => 'auth:user'], function () {
     Route::view('/admin', 'admin');
     Route::view('/admin/concerts', 'adminConcerts');
 
+    Route::get('/booking', [ConcertController::class, 'index']);
+    Route::get('/booking/{concert_id}', [ConcertController::class,'bookingConcertInfo']);
+    Route::post('/booking/{concert_id}', [BookingController::class,'makeBooking']);
+
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });
+
+
+
