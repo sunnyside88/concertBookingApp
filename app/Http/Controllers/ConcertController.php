@@ -128,8 +128,8 @@ class ConcertController extends Controller
 
         $concert = Concert::find($concert_id);
         $seat = Seat::where('concert_id', $concert_id)->get();
-        $AvailableSeat = $seat->where('IsBooked', false)->count();
+        $AvailableSeat = $seat->where('isBooked', 0)->count();
 
-        return view('booking.makeBooking', ['concert' => $concert,'availableSeat' => $AvailableSeat]);
+        return view('booking.makeBooking', ['concert' => $concert, 'availableSeat' => $AvailableSeat]);
     }
 }

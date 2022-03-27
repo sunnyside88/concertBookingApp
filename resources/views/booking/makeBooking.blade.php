@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Concert Fiver</title>
+    <title>GoLive</title>
 
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -14,17 +14,22 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 </head>
 
-@if (session('successfulStatus'))
-    <h6 class="alert alert-success">{{ session('successfulStatus') }}</h6>
-@elseif(session('failedStatus'))
-    <h6 class="alert alert-warning">{{ session('failedStatus') }}<h6>
+
+@if (session('failedStatus'))
+<script>
+    let msg = '{{ session('failedStatus') }}'
+      alert(msg);
+</script>
 @endif
 
+@extends('layouts.app')
+
+@section('content')
 <div class="container p-4">
     <div class="row">
         <div class="col">
             <img src={{ $concert->posterUrl }} alt="Poster"
-                style="width:250px;height:400px;display:block;margin-left:auto;margin-right:auto;">
+            style="width:250px;height:400px;display:block;margin-left:auto;margin-right:auto;">
         </div>
         <div class="col">
             <div style="text-align: center">
@@ -54,11 +59,11 @@
                     <label for="seatNum" class="col-sm-2 col-form-label">Seat:</label>
                 </div>
                 <div class="d-flex flex-row-reverse">
-                <span style="color:red;">
-                    @error('seatNum')
+                    <span style="color:red;">
+                        @error('seatNum')
                         {{ $message }}
-                    @enderror
-                </span>
+                        @enderror
+                    </span>
                 </div>
                 <div class="d-flex flex-row-reverse" style="margin-top: 10px;">
                     <button class="btn btn-primary" type="submit">book</button>
@@ -68,3 +73,4 @@
         </div>
     </div>
 </div>
+@endsection

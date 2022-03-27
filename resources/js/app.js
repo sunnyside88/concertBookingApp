@@ -17,6 +17,5 @@ require('./components/AddConcertModal');
 require('./components/ConcertList');
 require('./components/EditConcertModal');
 require('./components/PosterCard');
-require('./components/MakeBookingModal');
 
 

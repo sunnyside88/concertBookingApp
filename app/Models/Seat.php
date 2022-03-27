@@ -13,7 +13,6 @@ class Seat extends Model
     public $incrementing = true;
 
     protected $table = 'seats';
-    protected $primaryKey = 'seat_id';
     protected $keyType = 'string';
 
     protected $attributes = [
@@ -21,14 +20,16 @@ class Seat extends Model
     ];
 
     protected $fillable = [
-        'concert_id',
+        'concert_id', 'booking_id'
     ];
 
-    public function concert(){
+    public function concert()
+    {
         return $this->belongsTo(concert::class);
     }
 
-    public function bookings(){
+    public function booking()
+    {
         return $this->hasOne(booking::class);
     }
 }

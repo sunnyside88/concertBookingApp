@@ -10,16 +10,16 @@ class booking extends Model
     use HasFactory;
 
     protected $fillable = [
-        'seat_id', 'concert_id', 'user_id',
+        'concert_id', 'user_id',
     ];
-
-    public function seat()
-    {
-        return $this->belongsTo(seat::class);
-    }
 
     public function user()
     {
         return $this->belongsTo(user::class);
+    }
+
+    public function concert()
+    {
+        return $this->hasOne(Seat::class, 'concert_id');
     }
 }
