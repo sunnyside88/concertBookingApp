@@ -30,8 +30,8 @@ class BookingController extends Controller
             $booking->save();
 
             $bookingId = $booking->id;
-            $AvailableSeat->take($seatNum);
-            foreach ($AvailableSeat as $s) {
+            $selectedSeats = $AvailableSeat->take($seatNum);
+            foreach ($selectedSeats as $s) {
                 $s->booking_id = $bookingId;
                 $s->isBooked = 1;
                 $s->save();
