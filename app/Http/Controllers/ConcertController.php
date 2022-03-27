@@ -54,7 +54,7 @@ class ConcertController extends Controller
 
     public function getConcertListing()
     {
-        $concerts = DB::select('select * from concert');
+        $concerts = DB::select('select * from concerts');
         return response()->json($concerts);
     }
 
@@ -75,7 +75,7 @@ class ConcertController extends Controller
                 }
             } else {
                 $seatToDelete = $concertOriTotalSeat - $concertNewTotalSeat;
-                DB::table("seat")
+                DB::table("seats")
                     ->where("concert_id", "=", $id)
                     ->orderBy("id", "DESC")
                     ->take($seatToDelete)
@@ -88,6 +88,7 @@ class ConcertController extends Controller
             $concertData->totalSeats = $request->totalSeats;
             $concertData->price = $request->price;
             $concertData->time = $request->time;
+            $concertData->posterUrl = $request->posterUrl;
             $concertData->save();
         } catch (Exception $e) {
             return response()->json($e->getMessage(), 500);
@@ -113,5 +114,22 @@ class ConcertController extends Controller
         } catch (Exception $e) {
             return response()->json($e->getMessage(), 500);
         }
+    }
+
+    //For booking function 
+    public function index()
+    {
+        $concerts = Concert::all();
+        return view('booking.booking', ['concerts' => $concerts]);
+    }
+
+    public function bookingConcertInfo($concert_id)
+    {
+
+        $concert = Concert::find($concert_id);
+        $seat = Seat::where('concert_id', $concert_id)->get();
+        $AvailableSeat = $seat->where('isBooked', 0)->count();
+
+        return view('booking.makeBooking', ['concert' => $concert, 'availableSeat' => $AvailableSeat]);
     }
 }

@@ -5287,7 +5287,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./components/Carousel */ "./resources/js/components/Carousel.js");
 
-__webpack_require__(/*! ./components/ConcertModal */ "./resources/js/components/ConcertModal.js");
+__webpack_require__(/*! ./components/AddConcertModal */ "./resources/js/components/AddConcertModal.js");
 
 __webpack_require__(/*! ./components/ConcertList */ "./resources/js/components/ConcertList.js");
 
@@ -5339,6 +5339,432 @@ if (token) {
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/AddConcertModal.js":
+/*!****************************************************!*\
+  !*** ./resources/js/components/AddConcertModal.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ AddConcertModal)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.min.css */ "./node_modules/bootstrap/dist/css/bootstrap.min.css");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.modern.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _Breadcrumbs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Breadcrumbs */ "./resources/js/components/Breadcrumbs.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+
+
+
+function AddConcertModal() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState2 = _slicedToArray(_useState, 2),
+      showModal = _useState2[0],
+      setShowModal = _useState2[1];
+
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState4 = _slicedToArray(_useState3, 2),
+      title = _useState4[0],
+      setTitle = _useState4[1];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState6 = _slicedToArray(_useState5, 2),
+      performer = _useState6[0],
+      setPerformer = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState8 = _slicedToArray(_useState7, 2),
+      venue = _useState8[0],
+      setVenue = _useState8[1];
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState10 = _slicedToArray(_useState9, 2),
+      date = _useState10[0],
+      setDate = _useState10[1];
+
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState12 = _slicedToArray(_useState11, 2),
+      time = _useState12[0],
+      setTime = _useState12[1];
+
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState14 = _slicedToArray(_useState13, 2),
+      price = _useState14[0],
+      setPrice = _useState14[1];
+
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState16 = _slicedToArray(_useState15, 2),
+      totalSeats = _useState16[0],
+      setTotalSeats = _useState16[1];
+
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState18 = _slicedToArray(_useState17, 2),
+      posterUrl = _useState18[0],
+      setPosterUrl = _useState18[1];
+
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState20 = _slicedToArray(_useState19, 2),
+      titleError = _useState20[0],
+      setTitleError = _useState20[1];
+
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState22 = _slicedToArray(_useState21, 2),
+      performerError = _useState22[0],
+      setPerformerError = _useState22[1];
+
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState24 = _slicedToArray(_useState23, 2),
+      venueError = _useState24[0],
+      setVenueError = _useState24[1];
+
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState26 = _slicedToArray(_useState25, 2),
+      dateError = _useState26[0],
+      setDateError = _useState26[1];
+
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState28 = _slicedToArray(_useState27, 2),
+      timeError = _useState28[0],
+      setTimeError = _useState28[1];
+
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState30 = _slicedToArray(_useState29, 2),
+      priceError = _useState30[0],
+      setPriceError = _useState30[1];
+
+  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState32 = _slicedToArray(_useState31, 2),
+      totalSeatsError = _useState32[0],
+      setTotalSeatsError = _useState32[1];
+
+  var _useState33 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState34 = _slicedToArray(_useState33, 2),
+      posterUrlError = _useState34[0],
+      setPosterUrlError = _useState34[1];
+
+  var formChecker = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              if (title) {
+                setTitleError(false);
+              } else {
+                setTitleError(true);
+              }
+
+              if (performer) {
+                setPerformerError(false);
+              } else {
+                setPerformerError(true);
+              }
+
+              if (venue) {
+                setVenueError(false);
+              } else {
+                setVenueError(true);
+              }
+
+              if (date) {
+                setDateError(false);
+              } else {
+                setDateError(true);
+              }
+
+              if (time) {
+                setTimeError(false);
+              } else {
+                setTimeError(true);
+              }
+
+              if (/(^$|^\d+(\.\d{1,2})?$)/.test(price) && price > 0) {
+                setPriceError(false);
+              } else {
+                setPriceError(true);
+              }
+
+              if (/(^$|^\d+$)/.test(totalSeats) && totalSeats > 0) {
+                setTotalSeatsError(false);
+              } else {
+                setTotalSeatsError(true);
+              }
+
+              if (posterUrl) {
+                setPosterUrlError(false);
+              } else {
+                setPosterUrlError(true);
+              }
+
+            case 8:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function formChecker() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  var addConcert = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      var res;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              if (!(!timeError && !performerError && !venueError && !dateError && !timeError && !priceError && !totalSeatsError && !posterUrlError)) {
+                _context2.next = 5;
+                break;
+              }
+
+              _context2.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_4___default().post("http://127.0.0.1:8000/api/concert", {
+                title: title,
+                performer: performer,
+                venue: venue,
+                date: date,
+                time: time,
+                price: price,
+                totalSeats: totalSeats,
+                posterUrl: posterUrl
+              });
+
+            case 3:
+              res = _context2.sent;
+
+              if (res.status == 200) {
+                alert("Added Successfully!");
+                setShowModal(false);
+                window.location.reload();
+              }
+
+            case 5:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function addConcert() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  function resetFormFeedback() {
+    setTitleError(false);
+    setPerformerError(false);
+    setVenueError(false);
+    setDateError(false);
+    setTimeError(false);
+    setPriceError(false);
+    setTotalSeatsError(false);
+    setPosterUrlError(false);
+  }
+
+  ;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Breadcrumbs__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      activeLocation: "Manage Concerts"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
+      outline: true,
+      onClick: function onClick() {
+        setShowModal(true);
+        resetFormFeedback();
+      },
+      children: "New Concert"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Modal, {
+      isOpen: showModal,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.ModalHeader, {
+        toggle: function toggle() {
+          setShowModal(false);
+        },
+        children: "New Concert"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.ModalBody, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Form, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormGroup, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Label, {
+              "for": "title",
+              children: "Title"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Input, {
+              id: "title",
+              name: "title",
+              placeholder: "Enter title",
+              onChange: function onChange(e) {
+                return setTitle(e.target.value);
+              },
+              invalid: titleError
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormFeedback, {
+              children: "Title cannot be blank"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormGroup, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Label, {
+              "for": "performer",
+              children: "Performer"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Input, {
+              id: "performer",
+              name: "performer",
+              placeholder: "Enter Performer",
+              onChange: function onChange(e) {
+                return setPerformer(e.target.value);
+              },
+              invalid: performerError
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormFeedback, {
+              children: "Performer cannot be blank"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormGroup, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Label, {
+              "for": "venue",
+              children: "Venue"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Input, {
+              id: "venue",
+              name: "venue",
+              placeholder: "Enter Venue",
+              onChange: function onChange(e) {
+                return setVenue(e.target.value);
+              },
+              invalid: venueError
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormFeedback, {
+              children: "Venue cannot be blank"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormGroup, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Label, {
+              "for": "date",
+              children: "Date"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Input, {
+              id: "date",
+              name: "date",
+              type: "date",
+              onChange: function onChange(e) {
+                return setDate(e.target.value);
+              },
+              invalid: dateError
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormFeedback, {
+              children: "Date cannot be blank"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormGroup, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Label, {
+              "for": "time",
+              children: "Time"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Input, {
+              id: "time",
+              name: "time",
+              type: "time",
+              onChange: function onChange(e) {
+                return setTime(e.target.value);
+              },
+              invalid: timeError
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormFeedback, {
+              children: "Time cannot be blank"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormGroup, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Label, {
+              "for": "price",
+              children: "Price for each seat"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Input, {
+              id: "price",
+              name: "price",
+              placeholder: "Enter Price",
+              type: "number",
+              onChange: function onChange(e) {
+                return setPrice(e.target.value);
+              },
+              invalid: priceError
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormFeedback, {
+              children: "Only allow 2 decimal point and cannot be 0 or negative"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormGroup, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Label, {
+              "for": "totalSeats",
+              children: "Total Seat Available"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Input, {
+              id: "totalSeats",
+              name: "totalSeats",
+              placeholder: "Enter total seats",
+              type: "number",
+              onChange: function onChange(e) {
+                return setTotalSeats(e.target.value);
+              },
+              invalid: totalSeatsError
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormFeedback, {
+              children: "Only allow integer inputs and cannot be 0 or negative"
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormGroup, {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Label, {
+              "for": "posterUrl",
+              children: "Poster Image Url"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Input, {
+              id: "posterUrl",
+              name: "posterUrl",
+              placeholder: "Enter Poster Url",
+              onChange: function onChange(e) {
+                return setPosterUrl(e.target.value);
+              },
+              invalid: posterUrlError
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormFeedback, {
+              children: "Poster Image Url cannot be blank"
+            })]
+          })]
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.ModalFooter, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
+          color: "primary",
+          onClick: function onClick() {
+            formChecker();
+            addConcert();
+          },
+          children: "Save"
+        }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
+          onClick: function onClick() {
+            setShowModal(false);
+          },
+          children: "Cancel"
+        })]
+      })]
+    })]
+  });
+}
+
+if (document.getElementById("add-concert-modal")) {
+  react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(AddConcertModal, {}), document.getElementById("add-concert-modal"));
+}
 
 /***/ }),
 
@@ -5503,7 +5929,7 @@ function ConcertList() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_4___default().get("http://127.0.0.1:3000/api/concertListing");
+              return axios__WEBPACK_IMPORTED_MODULE_4___default().get("http://127.0.0.1:8000/api/concertListing");
 
             case 2:
               res = _context.sent;
@@ -5530,7 +5956,7 @@ function ConcertList() {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_4___default()["delete"]("http://127.0.0.1:3000/api/concert/".concat(id));
+              return axios__WEBPACK_IMPORTED_MODULE_4___default()["delete"]("http://127.0.0.1:8000/api/concert/".concat(id));
 
             case 2:
               res = _context2.sent;
@@ -5628,280 +6054,6 @@ if (document.getElementById("concert-list")) {
 
 /***/ }),
 
-/***/ "./resources/js/components/ConcertModal.js":
-/*!*************************************************!*\
-  !*** ./resources/js/components/ConcertModal.js ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ ConcertModal)
-/* harmony export */ });
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var bootstrap_dist_css_bootstrap_min_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap/dist/css/bootstrap.min.css */ "./node_modules/bootstrap/dist/css/bootstrap.min.css");
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.modern.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _Breadcrumbs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Breadcrumbs */ "./resources/js/components/Breadcrumbs.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-
-
-
-
-
-function ConcertModal() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-      _useState2 = _slicedToArray(_useState, 2),
-      showModal = _useState2[0],
-      setShowModal = _useState2[1];
-
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
-      _useState4 = _slicedToArray(_useState3, 2),
-      title = _useState4[0],
-      setTitle = _useState4[1];
-
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
-      _useState6 = _slicedToArray(_useState5, 2),
-      performer = _useState6[0],
-      setPerformer = _useState6[1];
-
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
-      _useState8 = _slicedToArray(_useState7, 2),
-      venue = _useState8[0],
-      setVenue = _useState8[1];
-
-  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
-      _useState10 = _slicedToArray(_useState9, 2),
-      date = _useState10[0],
-      setDate = _useState10[1];
-
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
-      _useState12 = _slicedToArray(_useState11, 2),
-      time = _useState12[0],
-      setTime = _useState12[1];
-
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
-      _useState14 = _slicedToArray(_useState13, 2),
-      price = _useState14[0],
-      setPrice = _useState14[1];
-
-  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
-      _useState16 = _slicedToArray(_useState15, 2),
-      totalSeats = _useState16[0],
-      setTotalSeats = _useState16[1];
-
-  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
-      _useState18 = _slicedToArray(_useState17, 2),
-      posterUrl = _useState18[0],
-      setPosterUrl = _useState18[1];
-
-  var addConcert = /*#__PURE__*/function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var res;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_4___default().post("http://127.0.0.1:3000/api/concert", {
-                title: title,
-                performer: performer,
-                venue: venue,
-                date: date,
-                time: time,
-                price: price,
-                totalSeats: totalSeats,
-                posterUrl: posterUrl
-              });
-
-            case 2:
-              res = _context.sent;
-
-              if (res.status == 200) {
-                alert("Added Successfully!");
-                setShowModal(false);
-                window.location.reload();
-              }
-
-            case 4:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }));
-
-    return function addConcert() {
-      return _ref.apply(this, arguments);
-    };
-  }();
-
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_Breadcrumbs__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      activeLocation: "Manage Concerts"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
-      outline: true,
-      onClick: function onClick() {
-        setShowModal(true);
-      },
-      children: "New Concert"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Modal, {
-      isOpen: showModal,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.ModalHeader, {
-        toggle: function toggle() {
-          setShowModal(false);
-        },
-        children: "New Concert"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.ModalBody, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Form, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormGroup, {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Label, {
-              "for": "title",
-              children: "Title"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Input, {
-              id: "title",
-              name: "title",
-              placeholder: "Enter title",
-              onChange: function onChange(e) {
-                return setTitle(e.target.value);
-              }
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormGroup, {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Label, {
-              "for": "performer",
-              children: "Performer"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Input, {
-              id: "performer",
-              name: "performer",
-              placeholder: "Enter Performer",
-              onChange: function onChange(e) {
-                return setPerformer(e.target.value);
-              }
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormGroup, {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Label, {
-              "for": "venue",
-              children: "Venue"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Input, {
-              id: "venue",
-              name: "venue",
-              placeholder: "Enter Venue",
-              onChange: function onChange(e) {
-                return setVenue(e.target.value);
-              }
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormGroup, {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Label, {
-              "for": "date",
-              children: "Date"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Input, {
-              id: "date",
-              name: "date",
-              type: "date",
-              onChange: function onChange(e) {
-                return setDate(e.target.value);
-              }
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormGroup, {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Label, {
-              "for": "time",
-              children: "Time"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Input, {
-              id: "time",
-              name: "time",
-              type: "time",
-              onChange: function onChange(e) {
-                return setTime(e.target.value);
-              }
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormGroup, {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Label, {
-              "for": "price",
-              children: "Price for each seat"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Input, {
-              id: "price",
-              name: "price",
-              placeholder: "Enter Price",
-              type: "number",
-              onChange: function onChange(e) {
-                return setPrice(e.target.value);
-              }
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormGroup, {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Label, {
-              "for": "totalSeats",
-              children: "Total Seat Available"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Input, {
-              id: "totalSeats",
-              name: "totalSeats",
-              placeholder: "Enter total seats",
-              type: "number",
-              onChange: function onChange(e) {
-                return setTotalSeats(e.target.value);
-              }
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormGroup, {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Label, {
-              "for": "posterUrl",
-              children: "Poster Image Url"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Input, {
-              id: "posterUrl",
-              name: "posterUrl",
-              placeholder: "Enter Poster Url",
-              onChange: function onChange(e) {
-                return setPosterUrl(e.target.value);
-              }
-            })]
-          })]
-        })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.ModalFooter, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
-          color: "primary",
-          onClick: addConcert,
-          children: "Save"
-        }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
-          onClick: function onClick() {
-            setShowModal(false);
-          },
-          children: "Cancel"
-        })]
-      })]
-    })]
-  });
-}
-
-if (document.getElementById("concert-modal")) {
-  react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(ConcertModal, {}), document.getElementById("concert-modal"));
-}
-
-/***/ }),
-
 /***/ "./resources/js/components/EditConcertModal.js":
 /*!*****************************************************!*\
   !*** ./resources/js/components/EditConcertModal.js ***!
@@ -5977,15 +6129,110 @@ function EditConcertModal(_ref) {
       time = _useState10[0],
       setTime = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
       _useState12 = _slicedToArray(_useState11, 2),
       price = _useState12[0],
       setPrice = _useState12[1];
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
       _useState14 = _slicedToArray(_useState13, 2),
       totalSeats = _useState14[0],
       setTotalSeats = _useState14[1];
+
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState16 = _slicedToArray(_useState15, 2),
+      posterUrl = _useState16[0],
+      setPosterUrl = _useState16[1];
+
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState18 = _slicedToArray(_useState17, 2),
+      titleError = _useState18[0],
+      setTitleError = _useState18[1];
+
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState20 = _slicedToArray(_useState19, 2),
+      performerError = _useState20[0],
+      setPerformerError = _useState20[1];
+
+  var _useState21 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState22 = _slicedToArray(_useState21, 2),
+      venueError = _useState22[0],
+      setVenueError = _useState22[1];
+
+  var _useState23 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState24 = _slicedToArray(_useState23, 2),
+      dateError = _useState24[0],
+      setDateError = _useState24[1];
+
+  var _useState25 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState26 = _slicedToArray(_useState25, 2),
+      timeError = _useState26[0],
+      setTimeError = _useState26[1];
+
+  var _useState27 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState28 = _slicedToArray(_useState27, 2),
+      priceError = _useState28[0],
+      setPriceError = _useState28[1];
+
+  var _useState29 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState30 = _slicedToArray(_useState29, 2),
+      totalSeatsError = _useState30[0],
+      setTotalSeatsError = _useState30[1];
+
+  var _useState31 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState32 = _slicedToArray(_useState31, 2),
+      posterUrlError = _useState32[0],
+      setPosterUrlError = _useState32[1];
+
+  var formChecker = function formChecker(async) {
+    if (title) {
+      setTitleError(false);
+    } else {
+      setTitleError(true);
+    }
+
+    if (performer) {
+      setPerformerError(false);
+    } else {
+      setPerformerError(true);
+    }
+
+    if (venue) {
+      setVenueError(false);
+    } else {
+      setVenueError(true);
+    }
+
+    if (date) {
+      setDateError(false);
+    } else {
+      setDateError(true);
+    }
+
+    if (time) {
+      setTimeError(false);
+    } else {
+      setTimeError(true);
+    }
+
+    if (/(^$|^\d+(\.\d{1,2})?$)/.test(price) && price > 0) {
+      setPriceError(false);
+    } else {
+      setPriceError(true);
+    }
+
+    if (/(^$|^\d+$)/.test(totalSeats) && totalSeats > 0) {
+      setTotalSeatsError(false);
+    } else {
+      setTotalSeatsError(true);
+    }
+
+    if (posterUrl) {
+      setPosterUrlError(false);
+    } else {
+      setPosterUrlError(true);
+    }
+  };
 
   var updateConcert = /*#__PURE__*/function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(id) {
@@ -5994,18 +6241,24 @@ function EditConcertModal(_ref) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_4___default().put("http://127.0.0.1:3000/api/concert/".concat(editConcertId), {
+              if (!(!timeError && !performerError && !venueError && !dateError && !timeError && !priceError && !totalSeatsError && !posterUrlError)) {
+                _context.next = 5;
+                break;
+              }
+
+              _context.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_4___default().put("http://127.0.0.1:8000/api/concert/".concat(editConcertId), {
                 title: title,
                 performer: performer,
                 venue: venue,
                 date: date,
                 time: time,
                 price: price,
-                totalSeats: totalSeats
+                totalSeats: totalSeats,
+                posterUrl: posterUrl
               });
 
-            case 2:
+            case 3:
               res = _context.sent;
 
               if (res.status == 200) {
@@ -6014,7 +6267,7 @@ function EditConcertModal(_ref) {
                 window.location.reload();
               }
 
-            case 4:
+            case 5:
             case "end":
               return _context.stop();
           }
@@ -6035,7 +6288,7 @@ function EditConcertModal(_ref) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_4___default().get("http://127.0.0.1:3000/api/concert/".concat(editConcertId));
+              return axios__WEBPACK_IMPORTED_MODULE_4___default().get("http://127.0.0.1:8000/api/concert/".concat(editConcertId));
 
             case 2:
               res = _context2.sent;
@@ -6046,8 +6299,9 @@ function EditConcertModal(_ref) {
               setTime(res.data.time);
               setVenue(res.data.venue);
               setTotalSeats(res.data.totalSeats);
+              setPosterUrl(res.data.posterUrl);
 
-            case 10:
+            case 11:
             case "end":
               return _context2.stop();
           }
@@ -6060,6 +6314,18 @@ function EditConcertModal(_ref) {
     };
   }();
 
+  function resetFormFeedback() {
+    setTitleError(false);
+    setPerformerError(false);
+    setVenueError(false);
+    setDateError(false);
+    setTimeError(false);
+    setPriceError(false);
+    setTotalSeatsError(false);
+    setPosterUrlError(false);
+  }
+
+  ;
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     if (editConcertId) {
       getCurrentConcert();
@@ -6071,6 +6337,7 @@ function EditConcertModal(_ref) {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.ModalHeader, {
         toggle: function toggle() {
           setShowModal(false);
+          resetFormFeedback;
         },
         children: "Edit Concert"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.ModalBody, {
@@ -6086,7 +6353,10 @@ function EditConcertModal(_ref) {
               value: title,
               onChange: function onChange(e) {
                 return setTitle(e.target.value);
-              }
+              },
+              invalid: titleError
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.FormFeedback, {
+              children: "Title cannot be blank"
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.FormGroup, {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Label, {
@@ -6099,7 +6369,10 @@ function EditConcertModal(_ref) {
               value: performer,
               onChange: function onChange(e) {
                 return setPerformer(e.target.value);
-              }
+              },
+              invalid: performerError
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.FormFeedback, {
+              children: "Performer cannot be blank"
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.FormGroup, {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Label, {
@@ -6112,7 +6385,10 @@ function EditConcertModal(_ref) {
               value: venue,
               onChange: function onChange(e) {
                 return setVenue(e.target.value);
-              }
+              },
+              invalid: venueError
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.FormFeedback, {
+              children: "Venue cannot be blank"
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.FormGroup, {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Label, {
@@ -6125,7 +6401,10 @@ function EditConcertModal(_ref) {
               value: date,
               onChange: function onChange(e) {
                 return setDate(e.target.value);
-              }
+              },
+              invalid: dateError
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.FormFeedback, {
+              children: "Date cannot be blank"
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.FormGroup, {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Label, {
@@ -6138,7 +6417,10 @@ function EditConcertModal(_ref) {
               value: time,
               onChange: function onChange(e) {
                 return setTime(e.target.value);
-              }
+              },
+              invalid: timeError
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.FormFeedback, {
+              children: "Time cannot be blank"
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.FormGroup, {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Label, {
@@ -6152,7 +6434,10 @@ function EditConcertModal(_ref) {
               value: price,
               onChange: function onChange(e) {
                 return setPrice(e.target.value);
-              }
+              },
+              invalid: priceError
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.FormFeedback, {
+              children: "Only allow 2 decimal point and cannot be 0 or negative"
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.FormGroup, {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Label, {
@@ -6166,24 +6451,34 @@ function EditConcertModal(_ref) {
               value: totalSeats,
               onChange: function onChange(e) {
                 return setTotalSeats(e.target.value);
-              }
+              },
+              invalid: totalSeatsError
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.FormFeedback, {
+              children: "Only allow integer inputs and cannot be 0 or negative"
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.FormGroup, {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Label, {
-              "for": "poster",
-              children: "File"
+              "for": "posterUrl",
+              children: "Poster Image Url"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Input, {
-              id: "poster",
-              name: "file",
-              type: "file",
-              accept: "image/png, image/jpeg"
+              id: "posterUrl",
+              name: "posterUrl",
+              placeholder: "Enter Poster Url",
+              value: posterUrl,
+              onChange: function onChange(e) {
+                return setPosterUrl(e.target.value);
+              },
+              invalid: posterUrlError
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.FormFeedback, {
+              children: "Poster Image Url cannot be blank"
             })]
           })]
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.ModalFooter, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Button, {
           onClick: function onClick() {
-            return updateConcert();
+            formChecker();
+            updateConcert();
           },
           color: "primary",
           children: "Save"
@@ -6263,7 +6558,7 @@ function PosterCard() {
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return axios__WEBPACK_IMPORTED_MODULE_4___default().get("http://127.0.0.1:3000/api/concertListing");
+              return axios__WEBPACK_IMPORTED_MODULE_4___default().get("http://127.0.0.1:8000/api/concertListing");
 
             case 2:
               res = _context.sent;

@@ -25,26 +25,6 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('concert', function (Blueprint $table) {
-            $table->id();
-            $table->string('title');
-            $table->string('date');
-            $table->string('performer');
-            $table->string('venue');
-            $table->string('time');
-            $table->string('totalSeats');
-            $table->string('posterUrl');
-            $table->decimal('price');
-            $table->timestamps();
-        });
-
-        Schema::create('seat', function (Blueprint $table) {
-            $table->id();
-            $table->integer('concert_id')->unsigned();
-            $table->foreign('concert_id')->references('id')->on('concert')->onDelete('cascade');
-            $table->boolean('isBooked');
-        });
-
         DB::table('users')->insert(
             array(
                 'name' => 'Admin',
