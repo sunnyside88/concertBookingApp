@@ -36,4 +36,9 @@ class AdminController extends Controller
     {
         return view('adminConcerts');
     }
+
+    public function showUserListing()
+    {
+        return view('adminUsers');
+    }
 }
