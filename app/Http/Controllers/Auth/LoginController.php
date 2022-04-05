@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -55,20 +56,34 @@ class LoginController extends Controller
 
     public function userLogin(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required|min:6'
-        ]);
-        if (Auth::guard('user')->attempt([
-            'email' => $request->email,
-            'password' => $request->password
-        ], $request->get('remember'))) {
-            if (Auth::guard('user')->user()->is_admin == 0) {
-                return redirect()->intended('/home');
-            } else {
-                return redirect()->intended('/admin');
+        //Error messages
+        $messages = [
+            "email.required" => "Email is required",
+            "email.email" => "Email is not valid",
+            "email.exists" => "Email doesn't exists",
+            "password.required" => "Password is required",
+            "password.min" => "Password must be at least 8 characters",
+            "password" => "Wrong password"
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required|password|min:8'
+        ], $messages);
+
+        if ($validator->fails()) {
+            return back()->withInput($request->only('email', 'remember'))->withErrors($validator);
+        } else {
+            if (Auth::guard('user')->attempt([
+                'email' => $request->email,
+                'password' => $request->password
+            ], $request->get('remember'))) {
+                if (Auth::guard('user')->user()->is_admin == 0) {
+                    return redirect()->intended('/home');
+                } else {
+                    return redirect()->intended('/admin');
+                }
             }
         }
-        return back()->withInput($request->only('email', 'remember'));
     }
 }
