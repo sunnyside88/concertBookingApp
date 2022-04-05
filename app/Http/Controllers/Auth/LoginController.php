@@ -68,7 +68,7 @@ class LoginController extends Controller
 
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|exists:users,email',
-            'password' => 'required|password|min:8'
+            'password' => 'required|min:8'
         ], $messages);
 
         if ($validator->fails()) {
@@ -83,6 +83,9 @@ class LoginController extends Controller
                 } else {
                     return redirect()->intended('/admin');
                 }
+            } else {
+                $validator->getMessageBag()->add('password', 'Wrong password');
+                return back()->withInput($request->only('email', 'remember'))->withErrors($validator);
             }
         }
     }
