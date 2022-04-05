@@ -1,3 +1,15 @@
+TO INSTALL AND RUN. DOWNLOAD THE REPOSITORY AND FOLLOW THE FOLLOWING STEPS.
+
+cd TO THE FOLDER APPLICATION ON CMD OR TERMINAL.
+RUN "composer install" ON CMD OR TERMINAL.
+COPY ".env.example" FILE TO ".env" ON THE ROOT FOLDER. YOU CAN TYPE "copy .env.example .env" IF USING COMMAND PROMPT WINDOWS OR "cp .env.example .env" IF USING TERMINAL, UBUNTU.
+RUN "php artisan key:generate"
+RUN "php artisan migrate"
+RUN "npm install"
+RUN "npm run dev"
+RUN "php artisan serve"
+GO TO "http://localhost:8000/"
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">

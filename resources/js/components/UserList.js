@@ -9,12 +9,12 @@ export default function UserList() {
     const [data, setData] = useState([]);
 
     const getUserListing = async () => {
-        let res = await axios.get("http://127.0.0.1:3000/api/userListing");
+        let res = await axios.get("http://127.0.0.1:8000/api/userListing");
         setData(res.data);
     };
 
     const deleteUser = async (id) => {
-        let res = await axios.delete(`http://127.0.0.1:3000/api/user/${id}`);
+        let res = await axios.delete(`http://127.0.0.1:8000/api/user/${id}`);
         window.location.reload();
     };
 
@@ -31,6 +31,7 @@ export default function UserList() {
                         <th>#</th>
                         <th>Name</th>
                         <th>email</th>
+                        <th>ID</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -42,6 +43,7 @@ export default function UserList() {
                                       <th scope="row">{index + 1}</th>
                                       <td>{x.name}</td>
                                       <td>{x.email}</td>
+                                      <td>{x.id}</td>
                                       <td>
                                           {"   "}
                                           <Button
