@@ -34,8 +34,5 @@ Route::group(['middleware' => 'auth:user'], function () {
     Route::get('/admin/users', [UserController::class, 'index']);
     Route::get('/admin/users', [App\Http\Controllers\AdminController::class, 'showUserListing']);
 
-    Route::get('/user', [UserController::class, 'profile'])->name('profile');
-    Route::get('/user/history', [App\Http\Controllers\BookingController::class, 'showBookingListing']);
-
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });
