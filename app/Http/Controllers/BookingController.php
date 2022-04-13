@@ -11,6 +11,28 @@ use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
+     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        //$this->middleware('auth');
+        $this->middleware('guest')->except('logout');
+        $this->middleware('guest:user')->except('logout');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function index()
+    {
+        return view('admin');
+    } 
+
     public function makeBooking($concert_id, Request $request)
     {
         $request->validate(
@@ -39,6 +61,23 @@ class BookingController extends Controller
             return redirect()->route('home')->with('successfulStatus', 'Concert Booked Successfully');
         } else {
             return redirect()->back()->with('failedStatus', 'Available Seat Not Enough');
+        }
+    }
+
+    public function getBookingListing()
+    {
+        $bookings = DB::table('bookings')
+            ->get();
+        return response()->json($bookings);
+    }
+
+    public function deleteBooking($id)
+    {
+        try {
+            Booking::find($id)->delete();
+            return response()->json('booking deleted');
+        } catch (Exception $e) {
+            return response()->json($e->getMessage(), 500);
         }
     }
 }

@@ -27,6 +27,18 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-3">
+            <div class="card d-flex" style="margin: 10px">
+                <div class="card-body align-items-center text-center justify-content-center">
+                    <img
+                        src="https://img.icons8.com/external-kiranshastry-lineal-color-kiranshastry/128/4a90e2/external-user-advertising-kiranshastry-lineal-color-kiranshastry-4.png"/>
+                    <button type="button" class="btn btn-outline-secondary"><a style="color:black;text-decoration: none;"
+                            href="{{ url('/admin/bookings') }}">Manage Bookings</a>
+                    </button>
+                    {{-- <div id="concert-modal"></div> --}}
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection

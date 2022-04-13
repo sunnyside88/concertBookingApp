@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Concert;
 use App\Models\Seat;
+use App\Models\booking;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -40,5 +41,10 @@ class AdminController extends Controller
     public function showUserListing()
     {
         return view('adminUsers');
+    }
+
+    public function showBookingListing()
+    {
+        return view('adminBookings');
     }
 }
