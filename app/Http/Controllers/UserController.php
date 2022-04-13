@@ -33,6 +33,11 @@ class UserController extends Controller
         return view('admin');
     }
 
+    public function profile()
+    {
+        return view('user');
+    }
+
     public function getUserListing()
     {
         $users = DB::table('users')

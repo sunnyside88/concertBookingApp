@@ -8,6 +8,7 @@ use App\Models\Seat;
 use App\Models\Booking;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class BookingController extends Controller
 {
@@ -39,6 +40,30 @@ class BookingController extends Controller
             return redirect()->route('home')->with('successfulStatus', 'Concert Booked Successfully');
         } else {
             return redirect()->back()->with('failedStatus', 'Available Seat Not Enough');
+        }
+    }
+
+    public function showBookingListing()
+    {
+        return view('userBooking');
+    }
+
+    public function getBookingListing()
+    {
+        $user = Auth::user()->id;
+        $bookings = DB::table('bookings')
+            ->where('user_id', '=', $user)
+            ->get();
+        return response()->json($bookings);
+    }
+
+    public function deleteBooking($id)
+    {
+        try {
+            booking::find($id)->delete();
+            return response()->json('Booking deleted');
+        } catch (Exception $e) {
+            return response()->json($e->getMessage(), 500);
         }
     }
 }
