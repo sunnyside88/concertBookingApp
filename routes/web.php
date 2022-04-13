@@ -24,15 +24,15 @@ Route::post('/login/user', [LoginController::class, 'userLogin']);
 Route::post('/register', [RegisterController::class, 'createUser']);
 
 Route::group(['middleware' => 'auth:user'], function () {
-    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->name('admin');
-    Route::get('/admin/concerts', [App\Http\Controllers\AdminController::class, 'showConcertListing'])->name('adminConcerts');
+    Route::get('/admin', [App\Http\Controllers\AdminController::class, 'index'])->middleware('can:isAdmin')->name('admin');
+    Route::get('/admin/concerts', [App\Http\Controllers\AdminController::class, 'showConcertListing'])->middleware('can:isAdmin')->name('adminConcerts');
 
-    Route::get('/home', [ConcertController::class, 'index'])->name('home');
-    Route::get('/booking/{concert_id}', [ConcertController::class, 'bookingConcertInfo']);
-    Route::post('/booking/{concert_id}', [BookingController::class, 'makeBooking']);
+    Route::get('/home', [ConcertController::class, 'index'])->name('home')->middleware('can:isUser');
+    Route::get('/booking/{concert_id}', [ConcertController::class, 'bookingConcertInfo'])->middleware('can:isUser');
+    Route::post('/booking/{concert_id}', [BookingController::class, 'makeBooking'])->middleware('can:isUser');
 
-    Route::get('/admin/users', [UserController::class, 'index']);
-    Route::get('/admin/users', [App\Http\Controllers\AdminController::class, 'showUserListing']);
+    Route::get('/admin/users', [UserController::class, 'index'])->middleware('can:isAdmin')->middleware('can:isUser');
+    Route::get('/admin/users', [App\Http\Controllers\AdminController::class, 'showUserListing'])->middleware('can:isAdmin');
 
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });
