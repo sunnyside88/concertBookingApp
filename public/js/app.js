@@ -6863,9 +6863,10 @@ function UserBookingList() {
 
             case 3:
               res = _context.sent;
+              console.log(res, "xxx");
               setData(res.data);
 
-            case 5:
+            case 6:
             case "end":
               return _context.stop();
           }

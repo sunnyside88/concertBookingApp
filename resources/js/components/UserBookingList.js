@@ -12,6 +12,7 @@ export default function UserBookingList() {
     const getBookingListing = async () => {
         let userId= $('#user-booking-list').attr("user-id")
         let res = await axios.get(`http://127.0.0.1:8000/api/bookingListing/${userId}`);
+        console.log(res,"xxx")
         setData(res.data);
     };
 

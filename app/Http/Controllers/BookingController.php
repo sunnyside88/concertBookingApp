@@ -71,16 +71,18 @@ class BookingController extends Controller
     public function getBookingListing()
     {
         $bookings = DB::table('bookings')
+            ->join('concerts', 'concerts.id', '=', 'bookings.concert_id')
             ->join('users', 'users.id', '=', 'bookings.user_id')
-            ->join('concerts', 'concerts.id', '=', 'bookings.id')
             ->get();
         return response()->json($bookings);
     }
 
     public function getBookingsByUserId($user_id)
     {
-        $bookings = Booking::where('user_id', $user_id)
-            ->join('concerts', 'concerts.id', '=', 'bookings.id')
+
+        $bookings = DB::table('bookings')
+            ->where('user_id', '=', $user_id)
+            ->join('concerts', 'concerts.id', '=', 'bookings.concert_id')
             ->get();
         return response()->json($bookings);
     }
