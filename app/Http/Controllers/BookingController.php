@@ -38,17 +38,20 @@ class BookingController extends Controller
     {
         $request->validate(
             [
-                'seatNum' => ['required', 'regex:/(^$|^\d+$)/', 'not_in:0'],
+                'seatNum' => ['required', 'regex:/(^$|^\d+$)/', 'not_in:0']
             ]
         );
 
         $seat = Seat::where('concert_id', $concert_id)->get();
         $AvailableSeat = $seat->where('isBooked', 0);
         $seatNum = $request->seatNum;
+        $totalAmount = $request->totalAmount;
 
         if (Count($AvailableSeat) >= $request->seatNum) {
             $booking = new Booking;
             $booking->concert_id = $concert_id;
+            $booking->total_amount = $totalAmount;
+            $booking->total_ticket = $seatNum;
             $booking->user_id = Auth::id();
             $booking->save();
 
@@ -68,6 +71,16 @@ class BookingController extends Controller
     public function getBookingListing()
     {
         $bookings = DB::table('bookings')
+            ->join('users', 'users.id', '=', 'bookings.user_id')
+            ->join('concerts', 'concerts.id', '=', 'bookings.id')
+            ->get();
+        return response()->json($bookings);
+    }
+
+    public function getBookingsByUserId($user_id)
+    {
+        $bookings = Booking::where('user_id', $user_id)
+            ->join('concerts', 'concerts.id', '=', 'bookings.id')
             ->get();
         return response()->json($bookings);
     }

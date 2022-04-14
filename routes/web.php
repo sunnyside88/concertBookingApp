@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth:user'], function () {
     Route::get('/home', [ConcertController::class, 'index'])->name('home')->middleware('can:isUser');
     Route::get('/booking/{concert_id}', [ConcertController::class, 'bookingConcertInfo'])->middleware('can:isUser');
     Route::post('/booking/{concert_id}', [BookingController::class, 'makeBooking'])->middleware('can:isUser');
+    Route::get('/bookings/{user_id}', [UserController::class, 'showBookingListing'])->middleware('can:isUser');
 
     Route::get('/admin/users', [UserController::class, 'index'])->middleware('can:isAdmin')->middleware('can:isUser');
     Route::get('/admin/users', [App\Http\Controllers\AdminController::class, 'showUserListing'])->middleware('can:isAdmin');

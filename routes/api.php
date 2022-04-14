@@ -30,5 +30,7 @@ Route::delete('concert/{id}', [ConcertController::class, 'deleteConcert']);
 
 Route::get('userListing', [UserController::class, 'getUserListing']);
 Route::delete('user/{id}', [UserController::class, 'deleteUser']);
+
 Route::get('bookingListing', [BookingController::class, 'getBookingListing']);
+Route::get('bookingListing/{user_id}', [BookingController::class, 'getBookingsByUserId']);
 Route::delete('booking/{id}', [BookingController::class, 'deleteBooking']);

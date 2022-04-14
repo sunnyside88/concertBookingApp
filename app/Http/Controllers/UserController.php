@@ -50,4 +50,9 @@ class UserController extends Controller
             return response()->json($e->getMessage(), 500);
         }
     }
+
+    public function showBookingListing($user_id)
+    {
+        return view('userBookings', compact('user_id'));
+    }
 }

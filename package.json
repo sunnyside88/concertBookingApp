@@ -29,6 +29,7 @@
     },
     "dependencies": {
         "antd": "^4.19.3",
+        "jquery": "^3.6.0",
         "react-toastify": "^8.2.0",
         "reactstrap": "^9.0.1"
     }
