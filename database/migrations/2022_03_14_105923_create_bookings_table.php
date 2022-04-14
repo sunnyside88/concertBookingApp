@@ -17,6 +17,7 @@ class CreateBookingsTable extends Migration
             $table->id();
             $table->bigInteger('concert_id');
             $table->bigInteger('user_id');
+            $table->decimal('total_amount');
             $table->timestamps();
         });
     }

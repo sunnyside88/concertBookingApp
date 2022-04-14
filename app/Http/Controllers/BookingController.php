@@ -8,10 +8,11 @@ use App\Models\Seat;
 use App\Models\Booking;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class BookingController extends Controller
 {
-     /**
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -31,7 +32,7 @@ class BookingController extends Controller
     public function index()
     {
         return view('admin');
-    } 
+    }
 
     public function makeBooking($concert_id, Request $request)
     {

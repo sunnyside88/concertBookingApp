@@ -49,12 +49,16 @@
                 <h5>Price per ticket:</h5>
                 <h5>{{ $concert->price }}</h5>
             </div>
+            <div class="d-flex justify-content-between">
+                <h5>Total Price:</h5>
+                <h5 id="totalAmount">0.00</h5>
+            </div>
             <form action="/booking/{{ $concert->id }}" method="POST" style="margin-top: 50px">
                 @csrf
                 <div class="d-flex flex-row-reverse">
                     <div class="col-sm-2">
                         <input type="number" class="form-control" name="seatNum" value="0"
-                            onchange="changeTotalPrice(this.value);" required>
+                            onchange="changeTotalPrice(this.value,{{$concert->price}});" required>
                     </div>
                     <label for="seatNum" class="col-sm-2 col-form-label">Seat:</label>
                 </div>
@@ -73,4 +77,10 @@
         </div>
     </div>
 </div>
+<script>
+    function changeTotalPrice(qty,price) {
+        let totalAmount = (qty * price).toFixed(2)
+        document.getElementById('totalAmount').innerHTML  = totalAmount;
+    }
+</script>
 @endsection
